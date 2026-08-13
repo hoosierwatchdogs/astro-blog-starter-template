@@ -2,7 +2,7 @@
 title: "Flock 3.0: From Hidden License Plate Readers to Eyes in the Muncie Sky"
 description: "An investigation into MPD drone proposals and transparency denials."
 pubDate: "August 12, 2026"
-heroImage: "/public/Drone Flying Over Muncie.png"
+heroImage: "Drone Flying Over Muncie.png"
 ---
 
 The Muncie Police Department’s quiet pivot from stationary license plate readers to autonomous airborne surveillance hit a wall at the March City Council meeting. Resolution 4-26, which proposed a five-year interlocal agreement with Delaware County to build a municipal drone base atop the Delaware County Building at 100 W. Main St., was tabled in a 6-3 vote after public pushback over missing costs and liability risks.
