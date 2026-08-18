@@ -2,49 +2,571 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import FormattedDate from '../components/FormattedDate.astro';
+import { CONTACT_EMAIL, SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const featuredPost = posts[0];
+const tipMailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Confidential tip for Hoosier Watchdogs')}`;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/hoosier-watchdogs-logo.png" />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+			<section class="hero" aria-labelledby="hero-title">
+				<div class="hero-copy">
+					<p class="eyebrow">Independent investigative reporting</p>
+					<h1 id="hero-title">Indiana power,<br /><em>under a brighter light.</em></h1>
+					<p class="hero-intro">
+						Hoosier Watchdogs follows records, money, contracts, and influence to show how public
+						power is used across Indiana.
+					</p>
+					<div class="hero-actions">
+						<a class="primary-action" href="/blog">Read investigations</a>
+						<a class="text-action" href={tipMailto}>
+							Share a confidential tip <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</div>
+
+				<div class="hero-art" aria-label="Hoosier Watchdogs lighthouse and Indiana Statehouse logo">
+					<div class="signal-lines" aria-hidden="true"></div>
+					<img src="/hoosier-watchdogs-logo.png" alt="" width="1254" height="1254" />
+					<p>Holding power accountable <span>•</span> Telling the truth</p>
+				</div>
+			</section>
+
+			<section class="focus-strip" aria-label="Reporting focus">
+				<p>Public records</p>
+				<p>State &amp; local government</p>
+				<p>Surveillance &amp; policing</p>
+				<p>Money &amp; influence</p>
+			</section>
+
+			{
+				featuredPost && (
+					<section class="featured" aria-labelledby="featured-title">
+						<div class="featured-heading">
+							<p class="eyebrow">Latest investigation</p>
+							<span class="rule" aria-hidden="true"></span>
+						</div>
+						<a class="featured-story" href={`/blog/${featuredPost.id}/`}>
+							<div class="story-image">
+								<img
+									src={featuredPost.data.heroImage}
+									alt=""
+									width="720"
+									height="480"
+								/>
+								<span class="story-label">Investigation</span>
+							</div>
+							<div class="story-copy">
+								<p class="story-date"><FormattedDate date={featuredPost.data.pubDate} /></p>
+								<h2 id="featured-title">{featuredPost.data.title}</h2>
+								<p>{featuredPost.data.description}</p>
+								<span class="read-link">Read the full report <span aria-hidden="true">→</span></span>
+							</div>
+						</a>
+					</section>
+				)
+			}
+
+			<section class="method" aria-labelledby="method-title">
+				<div class="method-intro">
+					<p class="eyebrow">The watchdog method</p>
+					<h2 id="method-title">Claims are cheap.<br />Documents are not.</h2>
+				</div>
+				<div class="method-grid">
+					<article>
+						<span>01</span>
+						<h3>Follow the record</h3>
+						<p>Public records, court filings, contracts, meeting minutes, and source documents.</p>
+					</article>
+					<article>
+						<span>02</span>
+						<h3>Connect the power</h3>
+						<p>Officials, donors, institutions, vendors, and the networks linking them together.</p>
+					</article>
+					<article>
+						<span>03</span>
+						<h3>Publish the proof</h3>
+						<p>Clear reporting that gives Hoosiers the evidence needed to demand accountability.</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="tip-callout" aria-labelledby="tip-title">
+				<p class="eyebrow">Know where to look?</p>
+				<h2 id="tip-title">Help point the light.</h2>
+				<p>Documents, firsthand knowledge, and specific leads can start the next investigation.</p>
+				<a href={tipMailto}>Contact Hoosier Watchdogs</a>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	:global(:root) {
+		--home-purple: #48236c;
+		--home-purple-dark: #281638;
+		--home-orange: #c94c16;
+		--home-orange-bright: #e76228;
+		--home-cream: #f5efe3;
+		--home-paper: #fffdf8;
+		--home-ink: #211d1b;
+	}
+
+	:global(body) {
+		background:
+			linear-gradient(rgba(255, 253, 248, 0.95), rgba(255, 253, 248, 0.98)),
+			repeating-linear-gradient(90deg, transparent 0, transparent 95px, rgba(72, 35, 108, 0.055) 96px);
+		color: var(--home-ink);
+	}
+
+	main {
+		width: auto;
+		max-width: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.hero {
+		display: grid;
+		grid-template-columns: minmax(0, 1.04fr) minmax(360px, 0.96fr);
+		width: min(1180px, calc(100% - 3rem));
+		min-height: 720px;
+		margin: 0 auto;
+		padding: 5.5rem 0 4.5rem;
+		align-items: center;
+		gap: clamp(3rem, 8vw, 8rem);
+	}
+
+	.eyebrow {
+		margin: 0 0 1.25rem;
+		color: var(--home-orange);
+		font-size: 0.74rem;
+		font-weight: 700;
+		letter-spacing: 0.19em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		max-width: 760px;
+		margin: 0;
+		color: var(--home-purple-dark);
+		font-size: clamp(3.7rem, 7.4vw, 7.2rem);
+		font-weight: 700;
+		letter-spacing: -0.055em;
+		line-height: 0.88;
+	}
+
+	h1 em {
+		color: var(--home-orange);
+		font-weight: 400;
+	}
+
+	.hero-intro {
+		max-width: 650px;
+		margin: 2rem 0 0;
+		color: #4c4642;
+		font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+		line-height: 1.55;
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: 1.5rem;
+		align-items: center;
+		flex-wrap: wrap;
+		margin-top: 2.2rem;
+	}
+
+	.primary-action,
+	.tip-callout a {
+		display: inline-flex;
+		min-height: 52px;
+		padding: 0.75rem 1.35rem;
+		align-items: center;
+		justify-content: center;
+		background: var(--home-purple);
+		color: #fff;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.09em;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: transform 180ms ease, background 180ms ease;
+	}
+
+	.primary-action:hover,
+	.primary-action:focus-visible,
+	.tip-callout a:hover,
+	.tip-callout a:focus-visible {
+		background: var(--home-orange);
+		color: #fff;
+		transform: translateY(-3px);
+	}
+
+	.text-action {
+		color: var(--home-purple-dark);
+		font-size: 0.82rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-decoration-color: var(--home-orange);
+		text-underline-offset: 0.35rem;
+	}
+
+	.text-action:hover,
+	.text-action:focus-visible {
+		color: var(--home-orange);
+	}
+
+	.hero-art {
+		position: relative;
+		padding: 1rem;
+		background: var(--home-cream);
+		box-shadow: 28px 28px 0 var(--home-purple), -12px -12px 0 rgba(201, 76, 22, 0.18);
+		transform: rotate(1.3deg);
+	}
+
+	.hero-art::after {
+		position: absolute;
+		inset: 1rem;
+		border: 1px solid rgba(72, 35, 108, 0.24);
+		content: '';
+		pointer-events: none;
+	}
+
+	.hero-art img {
+		display: block;
+		width: 100%;
+		border-radius: 0;
+	}
+
+	.hero-art p {
+		position: absolute;
+		right: -2rem;
+		bottom: 2.1rem;
+		left: 2rem;
+		z-index: 2;
+		margin: 0;
+		padding: 0.75rem 1rem;
+		background: var(--home-orange);
+		color: white;
+		font-size: 0.65rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.hero-art p span {
+		padding: 0 0.55rem;
+	}
+
+	.signal-lines {
+		position: absolute;
+		top: 24%;
+		right: -54px;
+		z-index: 3;
+		width: 120px;
+		height: 48px;
+		background: repeating-linear-gradient(0deg, transparent 0 5px, var(--home-orange) 6px 8px);
+		clip-path: polygon(0 44%, 100% 0, 100% 100%);
+		transform: rotate(3deg);
+	}
+
+	.focus-strip {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		background: var(--home-purple-dark);
+	}
+
+	.focus-strip p {
+		margin: 0;
+		padding: 1.3rem 1rem;
+		border-right: 1px solid rgba(255, 255, 255, 0.13);
+		color: var(--home-cream);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.13em;
+		text-align: center;
+		text-transform: uppercase;
+	}
+
+	.featured,
+	.method {
+		width: min(1180px, calc(100% - 3rem));
+		margin: 0 auto;
+		padding: 7rem 0;
+	}
+
+	.featured-heading {
+		display: flex;
+		gap: 1.5rem;
+		align-items: center;
+		margin-bottom: 2rem;
+	}
+
+	.featured-heading .eyebrow {
+		margin: 0;
+		white-space: nowrap;
+	}
+
+	.rule {
+		width: 100%;
+		height: 1px;
+		background: rgba(72, 35, 108, 0.22);
+	}
+
+	.featured-story {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.story-image {
+		position: relative;
+		min-height: 470px;
+		overflow: hidden;
+		background: var(--home-purple-dark);
+	}
+
+	.story-image img {
+		width: 100%;
+		height: 100%;
+		border-radius: 0;
+		object-fit: cover;
+		transition: transform 500ms ease;
+	}
+
+	.story-label {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		padding: 0.7rem 1rem;
+		background: var(--home-orange);
+		color: white;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.story-copy {
+		display: flex;
+		padding: clamp(2rem, 5vw, 4.5rem);
+		flex-direction: column;
+		justify-content: center;
+		background: var(--home-cream);
+		border: 1px solid rgba(72, 35, 108, 0.12);
+	}
+
+	.story-date {
+		margin: 0 0 1rem;
+		color: var(--home-orange);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.story-copy h2,
+	.method h2,
+	.tip-callout h2 {
+		margin: 0;
+		color: var(--home-purple-dark);
+		font-size: clamp(2.4rem, 4.5vw, 4.4rem);
+		letter-spacing: -0.045em;
+		line-height: 0.98;
+	}
+
+	.story-copy > p:not(.story-date) {
+		margin: 1.4rem 0;
+		color: #544e49;
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	.read-link {
+		color: var(--home-purple);
+		font-size: 0.78rem;
+		font-weight: 700;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
+	}
+
+	.featured-story:hover .story-image img,
+	.featured-story:focus-visible .story-image img {
+		transform: scale(1.035);
+	}
+
+	.featured-story:hover .read-link,
+	.featured-story:focus-visible .read-link {
+		color: var(--home-orange);
+	}
+
+	.method {
+		display: grid;
+		grid-template-columns: minmax(280px, 0.75fr) minmax(0, 1.25fr);
+		gap: clamp(3rem, 7vw, 7rem);
+		border-top: 1px solid rgba(72, 35, 108, 0.2);
+	}
+
+	.method-grid {
+		display: grid;
+		gap: 0;
+	}
+
+	.method-grid article {
+		display: grid;
+		grid-template-columns: 48px 0.6fr 1fr;
+		gap: 1rem;
+		padding: 1.8rem 0;
+		align-items: baseline;
+		border-bottom: 1px solid rgba(72, 35, 108, 0.16);
+	}
+
+	.method-grid span {
+		color: var(--home-orange);
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+	}
+
+	.method-grid h3 {
+		margin: 0;
+		color: var(--home-purple-dark);
+		font-size: 1.15rem;
+	}
+
+	.method-grid p {
+		margin: 0;
+		color: #5d5651;
+		font-size: 0.92rem;
+		line-height: 1.55;
+	}
+
+	.tip-callout {
+		padding: 6.5rem max(1.5rem, calc((100% - 900px) / 2));
+		background:
+			linear-gradient(rgba(40, 22, 56, 0.93), rgba(40, 22, 56, 0.93)),
+			url('/Drone Flying Over Muncie.png') center 45% / cover;
+		color: white;
+		text-align: center;
+	}
+
+	.tip-callout .eyebrow {
+		color: #ef8a5f;
+	}
+
+	.tip-callout h2 {
+		color: white;
+	}
+
+	.tip-callout p:not(.eyebrow) {
+		max-width: 650px;
+		margin: 1.4rem auto 2rem;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 1.05rem;
+	}
+
+	.tip-callout a {
+		background: var(--home-orange);
+	}
+
+	.tip-callout a:hover,
+	.tip-callout a:focus-visible {
+		background: white;
+		color: var(--home-purple-dark);
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: 1fr;
+			min-height: 0;
+			padding: 4.5rem 0 5rem;
+		}
+		.hero-copy {
+			max-width: 760px;
+		}
+		.hero-art {
+			width: min(560px, calc(100% - 1.5rem));
+			margin-left: auto;
+		}
+		.featured-story,
+		.method {
+			grid-template-columns: 1fr;
+		}
+		.method-grid {
+			margin-top: 1rem;
+		}
+	}
+
+	@media (max-width: 680px) {
+		.hero,
+		.featured,
+		.method {
+			width: min(100% - 2rem, 1180px);
+		}
+		h1 {
+			font-size: clamp(3.25rem, 16vw, 5.1rem);
+		}
+		.hero-art {
+			width: calc(100% - 1rem);
+			box-shadow: 14px 14px 0 var(--home-purple), -7px -7px 0 rgba(201, 76, 22, 0.18);
+		}
+		.hero-art p {
+			right: -0.8rem;
+			bottom: 1.2rem;
+			left: 1rem;
+			font-size: 0.55rem;
+		}
+		.signal-lines {
+			display: none;
+		}
+		.focus-strip {
+			grid-template-columns: 1fr 1fr;
+		}
+		.focus-strip p {
+			font-size: 0.6rem;
+		}
+		.featured,
+		.method {
+			padding: 4.5rem 0;
+		}
+		.story-image {
+			min-height: 280px;
+		}
+		.story-copy {
+			padding: 2rem 1.5rem;
+		}
+		.method-grid article {
+			grid-template-columns: 34px 1fr;
+		}
+		.method-grid p {
+			grid-column: 2;
+		}
+		.tip-callout {
+			padding-block: 5rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.primary-action,
+		.tip-callout a,
+		.story-image img {
+			transition: none;
+		}
+	}
+</style>
