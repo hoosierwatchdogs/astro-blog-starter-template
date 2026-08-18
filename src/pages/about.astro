@@ -2,6 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { CONTACT_EMAIL } from '../consts';
+
+const tipMailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Confidential tip for Hoosier Watchdogs')}`;
+const pitchMailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Reporting pitch for Hoosier Watchdogs')}`;
 ---
 
 <!doctype html>
@@ -37,7 +41,7 @@ import Footer from '../components/Footer.astro';
 						in Indiana—from state government and local politics to universities, police, prosecutors,
 						and the donor networks that shape them.
 					</p>
-					<a class="contact-button" href="mailto:hoosierwatchdogs@proton.me">
+					<a class="contact-button" href={tipMailto}>
 						<span>Share a tip</span>
 						<svg viewBox="0 0 24 24" aria-hidden="true">
 							<path d="M5 12h14M13 6l6 6-6 6"></path>
@@ -54,8 +58,8 @@ import Footer from '../components/Footer.astro';
 				</div>
 				<p class="mission-copy">
 					We publish investigations into state corruption, donor capture, university complicity,
-					surveillance, and the national money behind it. Hoosier Watchdogs publishes through
-					<strong>Muncie Voice</strong>, an independent outlet with a global audience.
+					surveillance, and the national money behind it. Reporting and posts are published here
+					on <strong>Hoosier Watchdogs</strong> as part of this independent project.
 				</p>
 			</section>
 
@@ -100,7 +104,8 @@ import Footer from '../components/Footer.astro';
 				</div>
 				<div class="contact-card">
 					<p>Have a tip or a document-based pitch?</p>
-					<a href="mailto:hoosierwatchdogs@proton.me">hoosierwatchdogs@proton.me</a>
+					<a href={pitchMailto}>{CONTACT_EMAIL}</a>
+					<button class="copy-email" type="button" data-email={CONTACT_EMAIL}>Copy email address</button>
 					<span>Confidential inquiries welcome.</span>
 				</div>
 			</section>
@@ -108,6 +113,21 @@ import Footer from '../components/Footer.astro';
 		<Footer />
 	</body>
 </html>
+
+<script>
+	document.querySelectorAll<HTMLButtonElement>('[data-email]').forEach((button) => {
+		button.addEventListener('click', async () => {
+			const email = button.dataset.email;
+			if (!email) return;
+			try {
+				await navigator.clipboard.writeText(email);
+				button.textContent = 'Email copied';
+			} catch {
+				window.location.href = `mailto:${email}`;
+			}
+		});
+	});
+</script>
 
 <style>
 	:global(:root) {
@@ -381,6 +401,27 @@ import Footer from '../components/Footer.astro';
 		overflow-wrap: anywhere;
 		text-decoration-thickness: 2px;
 		text-underline-offset: 4px;
+	}
+
+	.copy-email {
+		width: fit-content;
+		padding: 0;
+		border: 0;
+		border-bottom: 1px solid rgba(245, 239, 227, 0.55);
+		background: transparent;
+		color: var(--hw-cream);
+		font: inherit;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		cursor: pointer;
+		text-transform: uppercase;
+	}
+
+	.copy-email:hover,
+	.copy-email:focus-visible {
+		border-bottom-color: var(--hw-orange);
+		color: #fff;
 	}
 
 	.contact-card span {

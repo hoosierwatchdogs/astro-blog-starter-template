@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = "Hoosier Watchdogs";
 export const SITE_DESCRIPTION = 'Investigative reporting and public accountability in Indiana.';
+export const CONTACT_EMAIL = 'hoosierwatchdogs@proton.me';
