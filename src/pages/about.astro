@@ -1,101 +1,483 @@
 ---
-import Layout from '../layouts/BlogPost.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<Layout
-	title="About Hoosier Watchdogs"
-	description="Independent, document-based investigative reporting on power in Indiana."
-	pubDate={new Date('August 17 2026')}
-	heroImage="/hw-hero-logo.png"
->
-	<div class="hw-container">
-		<p class="hw-lead">
-			<strong>Hoosier Watchdogs</strong> is an independent investigative project focused on power in Indiana: 
-			state government, local politics, universities, police, prosecutors, and the donor networks that shape them.
-		</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="About | Hoosier Watchdogs"
+			description="Independent, document-based investigative reporting on power in Indiana."
+			image="/hoosier-watchdogs-logo.png"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="about-hero" aria-labelledby="about-title">
+				<div class="logo-panel">
+					<div class="logo-frame">
+						<img
+							src="/hoosier-watchdogs-logo.png"
+							alt="Hoosier Watchdogs logo featuring a lighthouse and the Indiana Statehouse"
+							width="1254"
+							height="1254"
+						/>
+					</div>
+					<p class="image-caption">Independent reporting from Indiana</p>
+				</div>
 
-		<h2>Our Mission</h2>
-		<p>
-			We publish investigative work that local outlets won’t touch: state corruption, donor capture, 
-			university complicity, surveillance, and the national money behind it. Hoosier Watchdogs publishes 
-			through <strong>Muncie Voice</strong>, an independent outlet with a global audience.
-		</p>
+				<div class="hero-copy">
+					<p class="eyebrow">About the project</p>
+					<h1 id="about-title">Watch the power.<br /><em>Follow the proof.</em></h1>
+					<p class="intro">
+						<strong>Hoosier Watchdogs</strong> is an independent investigative project focused on power
+						in Indiana—from state government and local politics to universities, police, prosecutors,
+						and the donor networks that shape them.
+					</p>
+					<a class="contact-button" href="mailto:hoosierwatchdogs@proton.me">
+						<span>Share a tip</span>
+						<svg viewBox="0 0 24 24" aria-hidden="true">
+							<path d="M5 12h14M13 6l6 6-6 6"></path>
+						</svg>
+					</a>
+				</div>
+			</section>
 
-		<h2>Core Principles</h2>
-		<ul>
-			<li>
-				<strong>Document-Driven:</strong> Built on public records, FOIA responses, court filings, contracts, and data.
-			</li>
-			<li>
-				<strong>Unpaid & Independent:</strong> No corporate or foundation funding, and no access deals.
-			</li>
-			<li>
-				<strong>Local Focus, National Scope:</strong> We use Indiana as a lens on oligarchy, surveillance, 
-				election infrastructure, foreign-policy capture, and the corruption of the "rules-based order."
-			</li>
-		</ul>
+			<section class="mission-section" aria-labelledby="mission-title">
+				<div class="section-number" aria-hidden="true">01</div>
+				<div>
+					<p class="eyebrow">Our mission</p>
+					<h2 id="mission-title">Reporting others won’t touch.</h2>
+				</div>
+				<p class="mission-copy">
+					We publish investigations into state corruption, donor capture, university complicity,
+					surveillance, and the national money behind it. Hoosier Watchdogs publishes through
+					<strong>Muncie Voice</strong>, an independent outlet with a global audience.
+				</p>
+			</section>
 
-		<h2>Contribute & Pitch</h2>
-		<p>
-			We welcome contributions from journalists who want to work with primary sources, keep their bylines, 
-			and build a portfolio of adversarial reporting.
-		</p>
-		<p>
-			Have a tip or a document-based pitch? Reach out to us directly at:
-			<br />
-			<a href="mailto:hoosierwatchdogs@proton.me" class="hw-email-link">hoosierwatchdogs@proton.me</a>
-		</p>
-	</div>
-</Layout>
+			<section class="principles-section" aria-labelledby="principles-title">
+				<header class="section-heading">
+					<p class="eyebrow">How we work</p>
+					<h2 id="principles-title">Core principles</h2>
+				</header>
+
+				<div class="principles-grid">
+					<article class="principle principle-featured">
+						<span class="principle-index">01</span>
+						<h3>Document-driven</h3>
+						<p>Built on public records, FOIA responses, court filings, contracts, and data.</p>
+					</article>
+
+					<article class="principle">
+						<span class="principle-index">02</span>
+						<h3>Unpaid &amp; independent</h3>
+						<p>No corporate or foundation funding, no access deals, and no loyalty to institutions.</p>
+					</article>
+
+					<article class="principle principle-wide">
+						<span class="principle-index">03</span>
+						<h3>Local focus, national scope</h3>
+						<p>
+							We use Indiana as a lens on oligarchy, surveillance, election infrastructure,
+							foreign-policy capture, and the corruption of the “rules-based order.”
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<section class="pitch-section" aria-labelledby="pitch-title">
+				<div class="pitch-copy">
+					<p class="eyebrow">Contribute &amp; pitch</p>
+					<h2 id="pitch-title">Bring the receipts.</h2>
+					<p>
+						We welcome journalists who want to work with primary sources, keep their bylines,
+						and build a portfolio of adversarial reporting.
+					</p>
+				</div>
+				<div class="contact-card">
+					<p>Have a tip or a document-based pitch?</p>
+					<a href="mailto:hoosierwatchdogs@proton.me">hoosierwatchdogs@proton.me</a>
+					<span>Confidential inquiries welcome.</span>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
 
 <style>
-	:root {
-		--hw-purple: #3B2358;
-		--hw-orange: #D9531E;
-		--hw-bg: #FAF8F5;
-		--hw-text: #1A1A1A;
+	:global(:root) {
+		--hw-purple: #48236c;
+		--hw-purple-dark: #281638;
+		--hw-orange: #c94c16;
+		--hw-cream: #f5efe3;
+		--hw-paper: #fffdf8;
+		--hw-ink: #211d1b;
 	}
 
-	.hw-container {
-		color: var(--hw-text);
-		line-height: 1.6;
+	:global(body) {
+		background:
+			linear-gradient(rgba(255, 253, 248, 0.92), rgba(255, 253, 248, 0.96)),
+			repeating-linear-gradient(90deg, transparent 0, transparent 79px, rgba(72, 35, 108, 0.05) 80px);
+		color: var(--hw-ink);
 	}
 
-	.hw-lead {
-		font-size: 1.25rem;
-		border-left: 4px solid var(--hw-orange);
-		padding-left: 1rem;
-		margin-bottom: 2rem;
+	main {
+		width: min(1180px, calc(100% - 3rem));
+		max-width: none;
+		margin: 0 auto;
+		padding: 5rem 0 6rem;
+	}
+
+	.about-hero {
+		display: grid;
+		grid-template-columns: minmax(320px, 0.85fr) minmax(420px, 1.15fr);
+		gap: clamp(3rem, 8vw, 8rem);
+		align-items: center;
+		min-height: 680px;
+	}
+
+	.logo-panel {
+		position: relative;
+	}
+
+	.logo-panel::before {
+		content: '';
+		position: absolute;
+		inset: -22px 22px 35px -22px;
+		z-index: -1;
+		background: var(--hw-purple);
+		transform: rotate(-2deg);
+	}
+
+	.logo-frame {
+		padding: clamp(0.6rem, 1.6vw, 1rem);
+		background: var(--hw-paper);
+		border: 1px solid rgba(40, 22, 56, 0.2);
+		box-shadow: 0 26px 60px rgba(40, 22, 56, 0.18);
+	}
+
+	.logo-frame img {
+		display: block;
+		width: 100%;
+		border-radius: 0;
+	}
+
+	.image-caption {
+		margin: 1.25rem 0 0;
+		color: var(--hw-purple-dark);
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-align: right;
+		text-transform: uppercase;
+	}
+
+	.eyebrow {
+		margin: 0 0 1rem;
+		color: var(--hw-orange);
+		font-size: 0.76rem;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0;
+		color: var(--hw-purple-dark);
+		font-size: clamp(3.25rem, 6vw, 6.5rem);
+		letter-spacing: -0.055em;
+		line-height: 0.92;
+	}
+
+	h1 em {
+		color: var(--hw-orange);
+		font-style: normal;
+	}
+
+	.intro {
+		max-width: 650px;
+		margin: 2rem 0;
+		font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+		line-height: 1.65;
+	}
+
+	.contact-button {
+		display: inline-flex;
+		gap: 1.75rem;
+		align-items: center;
+		padding: 0.8rem 0.85rem 0.8rem 1.25rem;
+		background: var(--hw-purple-dark);
+		color: var(--hw-paper);
+		font-size: 0.86rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-decoration: none;
+		text-transform: uppercase;
+		transition: background 180ms ease, transform 180ms ease;
+	}
+
+	.contact-button svg {
+		width: 2rem;
+		height: 2rem;
+		padding: 0.35rem;
+		background: var(--hw-orange);
+		fill: none;
+		stroke: currentColor;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke-width: 1.5;
+	}
+
+	.contact-button:hover {
+		background: var(--hw-orange);
+		color: var(--hw-paper);
+		transform: translateY(-2px);
+	}
+
+	.contact-button:focus-visible,
+	.contact-card a:focus-visible {
+		outline: 3px solid var(--hw-orange);
+		outline-offset: 4px;
+	}
+
+	.mission-section {
+		display: grid;
+		grid-template-columns: 0.25fr 0.9fr 1.35fr;
+		gap: 2rem;
+		align-items: start;
+		margin: 6rem 0;
+		padding: 4rem 0;
+		border-top: 1px solid rgba(72, 35, 108, 0.25);
+		border-bottom: 1px solid rgba(72, 35, 108, 0.25);
+	}
+
+	.section-number {
+		color: rgba(72, 35, 108, 0.24);
+		font-size: 3.5rem;
+		font-weight: 700;
+		line-height: 1;
 	}
 
 	h2 {
-		color: var(--hw-purple);
-		margin-top: 2rem;
-		margin-bottom: 0.75rem;
+		margin: 0;
+		color: var(--hw-purple-dark);
+		font-size: clamp(2.1rem, 4vw, 4rem);
+		letter-spacing: -0.045em;
+		line-height: 1;
+	}
+
+	.mission-copy {
+		margin: 0;
+		font-size: 1.15rem;
+		line-height: 1.75;
+	}
+
+	.section-heading {
+		display: flex;
+		justify-content: space-between;
+		align-items: end;
+		margin-bottom: 2.5rem;
+	}
+
+	.principles-grid {
+		display: grid;
+		grid-template-columns: 1.1fr 0.9fr;
+		gap: 1rem;
+	}
+
+	.principle {
+		min-height: 220px;
+		padding: clamp(1.5rem, 3vw, 2.5rem);
+		background: var(--hw-cream);
+		border-top: 5px solid var(--hw-orange);
+	}
+
+	.principle-featured {
+		background: var(--hw-purple-dark);
+		color: var(--hw-paper);
+		border-top-color: var(--hw-orange);
+	}
+
+	.principle-wide {
+		display: grid;
+		grid-template-columns: auto 0.8fr 1.2fr;
+		grid-column: 1 / -1;
+		gap: 2rem;
+		align-items: start;
+		min-height: auto;
+	}
+
+	.principle-index {
+		color: var(--hw-orange);
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.15em;
+	}
+
+	.principle h3 {
+		margin: 2rem 0 1rem;
+		color: var(--hw-purple-dark);
+		font-size: clamp(1.5rem, 2.5vw, 2.3rem);
+		letter-spacing: -0.025em;
+	}
+
+	.principle-featured h3 {
+		color: var(--hw-paper);
+	}
+
+	.principle-wide h3,
+	.principle-wide p {
+		margin-top: 0;
+	}
+
+	.principle p {
+		max-width: 560px;
+		margin-bottom: 0;
+		line-height: 1.6;
+	}
+
+	.pitch-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: clamp(2rem, 8vw, 7rem);
+		align-items: center;
+		margin-top: 7rem;
+		padding: clamp(2rem, 5vw, 5rem);
+		background: var(--hw-purple);
+		color: var(--hw-paper);
+	}
+
+	.pitch-section h2 {
+		color: var(--hw-paper);
+	}
+
+	.pitch-copy > p:last-child {
+		margin-bottom: 0;
+		line-height: 1.65;
+	}
+
+	.contact-card {
+		padding: 2rem;
+		background: var(--hw-paper);
+		color: var(--hw-ink);
+		box-shadow: 12px 12px 0 var(--hw-orange);
+	}
+
+	.contact-card p {
+		margin-top: 0;
 		font-weight: 700;
 	}
 
-	ul {
-		list-style-type: square;
-		padding-left: 1.5rem;
-	}
-
-	li {
-		margin-bottom: 0.5rem;
-	}
-
-	li strong {
-		color: var(--hw-purple);
-	}
-
-	.hw-email-link {
+	.contact-card a {
+		display: inline-block;
+		max-width: 100%;
 		color: var(--hw-orange);
-		font-weight: bold;
-		text-decoration: underline;
+		font-weight: 700;
+		overflow-wrap: anywhere;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 4px;
 	}
 
-	.hw-email-link:hover {
-		color: var(--hw-purple);
+	.contact-card span {
+		display: block;
+		margin-top: 1rem;
+		color: #655e58;
+		font-size: 0.78rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	@media (max-width: 900px) {
+		main {
+			width: min(100% - 2rem, 720px);
+			padding-top: 3rem;
+		}
+
+		.about-hero,
+		.pitch-section {
+			grid-template-columns: 1fr;
+		}
+
+		.about-hero {
+			gap: 4rem;
+		}
+
+		.logo-panel {
+			max-width: 520px;
+		}
+
+		.hero-copy {
+			grid-row: 1;
+		}
+
+		.mission-section {
+			grid-template-columns: auto 1fr;
+		}
+
+		.mission-copy {
+			grid-column: 2;
+		}
+	}
+
+	@media (max-width: 620px) {
+		main {
+			width: min(100% - 1.5rem, 720px);
+		}
+
+		h1 {
+			font-size: clamp(2.9rem, 15vw, 4.3rem);
+		}
+
+		.logo-panel::before {
+			inset: -12px 12px 25px -12px;
+		}
+
+		.mission-section,
+		.principles-grid,
+		.principle-wide {
+			display: block;
+		}
+
+		.mission-section {
+			margin: 4rem 0;
+			padding: 3rem 0;
+		}
+
+		.section-number {
+			margin-bottom: 2rem;
+		}
+
+		.mission-copy {
+			margin-top: 2rem;
+		}
+
+		.principle {
+			margin-bottom: 1rem;
+		}
+
+		.principle-wide h3 {
+			margin-top: 2rem;
+		}
+
+		.pitch-section {
+			margin-top: 4rem;
+			padding: 2rem 1.25rem 2.5rem;
+		}
+
+		.contact-card {
+			padding: 1.35rem;
+			box-shadow: 8px 8px 0 var(--hw-orange);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.contact-button {
+			transition: none;
+		}
 	}
 </style>
-
